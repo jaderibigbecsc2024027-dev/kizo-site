@@ -8,6 +8,10 @@
     <meta name="description" content="KIZO is a 2D anime collectible ecosystem on Robinhood Chain. Collect your spirit, awaken the Shrine." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Warms up the connection to Supabase Storage (where Collection
+         images live) before the page even asks for the first image, so the
+         handshake overhead doesn't sit in front of the actual download. -->
+    <link rel="preconnect" href="%VITE_SUPABASE_URL%" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
