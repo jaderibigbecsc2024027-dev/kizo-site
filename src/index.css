@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-body antialiased;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: #16160F;
+  color: #D6FA2B;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #16160F;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.torii-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2.5rem 0;
+}
+
+.eyebrow {
+  @apply font-mono uppercase tracking-[0.25em] text-xs text-stone;
+}
+
+.container-kizo {
+  @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 bg-ink text-lime font-mono uppercase tracking-widest text-sm px-7 py-4 transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0;
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 92% 100%, 0 100%);
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 bg-transparent border border-ink/70 text-ink font-mono uppercase tracking-widest text-sm px-7 py-4 transition-colors duration-150 hover:bg-ink hover:text-paper;
+}
+
+.card-panel {
+  @apply bg-paper border border-ink/10 shadow-[6px_6px_0_0_rgba(22,22,15,0.06)];
+}
