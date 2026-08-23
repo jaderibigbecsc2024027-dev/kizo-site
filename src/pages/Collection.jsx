@@ -101,6 +101,8 @@ export default function Collection() {
                       src={featured.image_url}
                       alt={`KIZO sneak peek — ${featured.name}, revealed`}
                       className="w-full h-full object-cover"
+                      fetchPriority="high"
+                      loading="eager"
                     />
                   ) : (
                     <span className="font-display text-lime/70 text-3xl">?</span>
@@ -116,7 +118,7 @@ export default function Collection() {
               <div key={s.id} className="flex flex-col">
                 <div className="aspect-square bg-ink flex items-center justify-center relative overflow-hidden">
                   {s.revealed && s.image_url ? (
-                    <img src={s.image_url} alt="" className="w-full h-full object-cover" />
+                    <img src={s.image_url} alt="" className="w-full h-full object-cover" loading="lazy" />
                   ) : (
                     <>
                       <span className="font-display text-lime/70 text-3xl">?</span>
