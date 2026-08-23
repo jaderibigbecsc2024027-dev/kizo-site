@@ -7,6 +7,28 @@ import { supabase } from '../lib/supabase.js'
 // the site should never show a broken page just because the backend isn't
 // set up yet. Manage the real data from Supabase (Table Editor) instead of
 // editing this array once collection_spirits is live.
+// Shows a soft pulsing placeholder in place of the image until it has
+// actually finished downloading, then fades the real image in — instead of
+// a hard block of color that abruptly gets replaced once the file arrives.
+function RevealImage({ src, alt, fetchPriority, loading: loadingAttr }) {
+  const [loaded, setLoaded] = useState(false)
+  return (
+    <div className="absolute inset-0">
+      {!loaded && <div className="absolute inset-0 bg-stone/25 animate-pulse" />}
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setLoaded(true)}
+        fetchPriority={fetchPriority}
+        loading={loadingAttr}
+        className={`w-full h-full object-cover transition-opacity duration-500 ${
+          loaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+    </div>
+  )
+}
+
 const fallbackSpirits = [
   { id: '01', name: 'Spirit 01', revealed: true, image_url: character01 },
   ...Array.from({ length: 11 }, (_, i) => ({
@@ -95,12 +117,11 @@ export default function Collection() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {featured && (
               <div className="col-span-2 sm:col-span-3 lg:col-span-2 lg:row-span-2 flex flex-col">
-                <div className="flex-1 bg-charcoal overflow-hidden min-h-[240px] flex items-center justify-center">
+                <div className="flex-1 bg-charcoal overflow-hidden min-h-[240px] flex items-center justify-center relative">
                   {featured.revealed && featured.image_url ? (
-                    <img
+                    <RevealImage
                       src={featured.image_url}
                       alt={`KIZO sneak peek — ${featured.name}, revealed`}
-                      className="w-full h-full object-cover"
                       fetchPriority="high"
                       loading="eager"
                     />
@@ -118,7 +139,7 @@ export default function Collection() {
               <div key={s.id} className="flex flex-col">
                 <div className="aspect-square bg-ink flex items-center justify-center relative overflow-hidden">
                   {s.revealed && s.image_url ? (
-                    <img src={s.image_url} alt="" className="w-full h-full object-cover" loading="lazy" />
+                    <RevealImage src={s.image_url} alt="" loading="lazy" />
                   ) : (
                     <>
                       <span className="font-display text-lime/70 text-3xl">?</span>
