@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabase.js'
 const KIZO_PROFILE_URL = 'https://x.com/kizohood'
 // Point this at the exact pinned/announcement post once you have it — right
 // now it reuses the profile link as a placeholder.
-const KIZO_POST_URL = 'https://x.com/kizohood'
+const KIZO_POST_URL = 'https://x.com/kizohood/status/2091816619718627495?s=20'
 
 function isLikelyWallet(v) {
   return /^0x[a-fA-F0-9]{40}$/.test(v.trim())
