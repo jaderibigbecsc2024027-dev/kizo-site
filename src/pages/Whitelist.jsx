@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import ToriiDivider from '../components/ToriiDivider.jsx'
 import { supabase } from '../lib/supabase.js'
+const WHITELIST_OPEN = false;
 
 const KIZO_PROFILE_URL = 'https://x.com/kizohood'
 // Point this at the exact pinned/announcement post once you have it — right
@@ -32,6 +33,7 @@ function commentLinkError(v) {
 }
 
 export default function Whitelist() {
+  if (!WHITELIST_OPEN) { return ( <div className="container-kizo py-24 text-center max-w-xl mx-auto"> <p className="eyebrow mb-5">Whitelist</p> <h1 className="font-display text-4xl sm:text-5xl mb-6">Registration is closed.</h1> <p className="text-stone"> Thanks to everyone who signed up. Follow @kizohood on X for updates on what's next. </p> </div> ) }
   const [form, setForm] = useState({
     wallet: '',
     twitter: '',
